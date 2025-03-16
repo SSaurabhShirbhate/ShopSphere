@@ -1,149 +1,118 @@
-# 🛒 ShopSphere - Full-Stack E-Commerce Platform
+# ShopSphere - Full-Stack E-Commerce Platform
 
-ShopSphere is a full-stack e-commerce platform that provides users with a seamless online shopping experience. It features secure authentication, role-based access control (RBAC), product management, order processing, and real-time chat for customer support. The platform is built with modern technologies for scalability and maintainability.
+## 📌 Overview
+ShopSphere is a robust full-stack e-commerce platform designed to provide a seamless shopping experience. Built with **React.js**, **Spring Boot**, and **Material UI**, it supports secure authentication, product management, order processing, and payment integration.
 
----
+## 🛠 Tech Stack
+- **Frontend:** React.js, Material UI, Redux Toolkit
+- **Backend:** Spring Boot, Spring Security, JWT, Hibernate
+- **Database:** MySQL (Structured Data), MongoDB (Chat History)
+- **Payment Gateway:** Razorpay, Stripe
+- **Security:** JWT Authentication, Spring Security, Role-Based Access Control (RBAC)
+- **Other Tools:** Postman, GitHub, Docker, AWS (for future deployment)
 
-## 🚀 Tech Stack
+## 🚀 Features
+### User Module
+- User authentication using JWT and Spring Security
+- Role-based access control (Buyer, Seller, Admin)
+- Profile management (update user details, change password)
 
-- **Frontend:** React.js, Material UI, Tailwind CSS  
-- **Backend:** Java, Spring Boot, Spring Security  
-- **Database:** MySQL (structured data), MongoDB (chat history)  
-- **Authentication:** JWT, Bcrypt, RBAC  
-- **Payment Integration:** Razorpay, Stripe  
-- **Deployment:** Docker, AWS  
-- **Real-time Features:** WebSockets (chat)  
+### Product Module
+- Sellers can add, edit, and delete products (after admin approval)
+- Buyers can browse, search, and filter products
+- Category-wise product listing
 
----
+### Order & Cart Module
+- Add/remove items to/from cart
+- Place orders with multiple items
+- Order status tracking
+- Email notifications for order updates
 
-## 🎯 Features
+### Payment Module
+- Secure transactions with Razorpay and Stripe
+- Order confirmation only after successful payment
+- Refund handling
 
-✅ User authentication with **JWT & Spring Security**  
-✅ **Role-based access control (RBAC)** (Admin, Buyer, Seller)  
-✅ **Product management** (list, edit, delete)  
-✅ **Order processing system** with secure payments  
-✅ **Shopping cart and checkout functionality**  
-✅ **Real-time chat** for buyer-seller interaction  
-✅ **Admin dashboard** for managing users, products, and orders  
-✅ **Responsive UI** with Material UI and Tailwind CSS  
+### Admin Module
+- Approve/reject seller requests
+- Manage users, products, and orders
+- View sales analytics
 
----
+## 🏗 Architecture
+ShopSphere follows a **Monolithic Architecture** structured as:
+- **Controller Layer** (Handles API requests)
+- **Service Layer** (Business logic implementation)
+- **Repository Layer** (Database operations)
 
-## 🏗️ Architecture
+### 🛠 Transition to Microservices (Planned)
+- **User Service**: Handles authentication & user management
+- **Product Service**: Manages products & categories
+- **Order Service**: Handles cart, orders & transactions
+- **Payment Service**: Integrates with payment gateways
 
-The application follows the **Controller-Service-Repository** design pattern.
+Each service will have its own database and communicate via REST APIs or gRPC.
 
-```plaintext
-Frontend (React.js) -----> Backend (Spring Boot)
-   |                         |
-   |                         |
-Material UI            Spring Security
-   |                         |
-   |                         |
-Browser <-----> API Gateway <-----> Microservices (Future)
+## 🗂 Database Design
+- **User Table** (id, name, email, role, password, created_at)
+- **Product Table** (id, name, description, price, stock, seller_id, category_id)
+- **Order Table** (id, user_id, total_amount, status, created_at)
+- **Payment Table** (id, order_id, payment_status, transaction_id)
+
+## 🔗 UML Diagram
+```
+            +------------+        +------------+       +------------+
+            |  Frontend  | -----> |  Backend   | -----> |  Database  |
+            +------------+        +------------+       +------------+
+                  |                     |                     |
+          React.js, Redux           Spring Boot          MySQL, MongoDB
 ```
 
-### 🛠️ Backend Modules:
-- **User Service**: Handles authentication, user roles, and profile management.
-- **Product Service**: Manages product listings and details.
-- **Order Service**: Handles cart, orders, and payments.
-- **Chat Service**: Manages real-time messaging between buyers and sellers.
-
----
-
-## 📊 UML Diagram
-
-```plaintext
-                   +---------------------+
-                   |      User            |
-                   |---------------------|
-                   | userId               |
-                   | name                 |
-                   | email                |
-                   | password             |
-                   | role (BUYER/SELLER)  |
-                   +---------------------+
-                              |
-                              |
-      +-------------------------------------------+
-      |                                           |
-+-----------------+                      +----------------+
-|     Product     |                      |     Order      |
-|----------------|                      |----------------|
-| productId      |                      | orderId        |
-| name          |                      | userId         |
-| price         |                      | totalAmount    |
-| sellerId      |                      | paymentStatus  |
-+-----------------+                      +----------------+
-                     |
-                     |
-               +----------------+
-               |  Payment       |
-               |----------------|
-               | paymentId      |
-               | orderId        |
-               | amount         |
-               | status         |
-               +----------------+
+## 🔧 Installation & Setup
+### Backend (Spring Boot)
+```sh
+cd backend
+mvn clean install
+mvn spring-boot:run
 ```
 
----
+### Frontend (React.js)
+```sh
+cd frontend
+npm install
+npm start
+```
 
-## 💾 Database Design
+## 🔌 API Endpoints (Examples)
+### User Authentication
+- `POST /api/auth/register` → Register a new user
+- `POST /api/auth/login` → Authenticate & get JWT token
 
-- **Users Table (MySQL)**  
-  - Stores user details with roles (BUYER/SELLER)  
-- **Products Table (MySQL)**  
-  - Stores product listings from sellers  
-- **Orders Table (MySQL)**  
-  - Stores orders and payment status  
-- **Chats (MongoDB)**  
-  - Stores real-time chat messages for negotiations  
+### Products
+- `GET /api/products` → Get all products
+- `POST /api/products` → Add new product (Seller)
 
----
+### Orders
+- `POST /api/orders` → Place an order
+- `GET /api/orders/{id}` → Get order details
 
-## 🔧 Setup Instructions
+### Payments
+- `POST /api/payments` → Process payment
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/SSaurabhShirbhate/ShopSphere.git
-   cd ShopSphere
-   ```
+## 🔒 Security Measures
+- JWT authentication with Spring Security
+- Role-based access control (RBAC)
+- Password hashing using Bcrypt
+- API request validation
 
-2. Install frontend dependencies:
-   ```sh
-   cd frontend
-   npm install
-   npm start
-   ```
+## 🚀 Future Enhancements
+- Implement microservices architecture
+- Deploy on AWS with Kubernetes
+- Introduce AI-powered recommendations
 
-3. Set up the backend:
-   ```sh
-   cd backend
-   mvn clean install
-   mvn spring-boot:run
-   ```
+## 📝 Author
+- **Saurabh Shirbhate**  
+- [LinkedIn](https://linkedin.com/in/saurabhshirbhate)  
+- [GitHub](https://github.com/SSaurabhShirbhate)
 
-4. Configure **MySQL** and **MongoDB** in `application.properties`.
-
-5. Visit `http://localhost:3000` for the frontend.
-
----
-
-## 📌 Future Improvements
-
-- Convert to **microservices architecture**  
-- Implement **AI-powered recommendations**  
-- Add **GraphQL** support for efficient queries  
-- Deploy with **Kubernetes**  
-
----
-
-## 👨‍💻 Connect with Me
-
-🔗 **LinkedIn:** [linkedin.com/in/saurabhshirbhate](https://linkedin.com/in/saurabhshirbhate)  
-📂 **GitHub:** [github.com/SSaurabhShirbhate](https://github.com/SSaurabhShirbhate)  
-
----
-
-### ⭐ Don't forget to star this repo if you found it useful! ⭐
+## 📜 License
+This project is open-source under the MIT License.
