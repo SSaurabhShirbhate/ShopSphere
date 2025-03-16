@@ -1,144 +1,119 @@
-# ShopSphere
+# ShopSphere - Full-Stack E-Commerce Platform
 
-## Overview
+![ShopSphere](https://your-image-link.com/banner.png)
 
-ShopSphere is a full-stack e-commerce platform that enables users to browse products, manage carts, place orders, and make secure payments using Razorpay and Stripe. The platform supports customer, seller, and admin roles with distinct functionalities, ensuring a smooth shopping experience.
+## 🚀 Overview
+ShopSphere is a full-stack e-commerce platform that provides a seamless shopping experience with features like user authentication, product management, order processing, secure payments, and real-time chat. The platform follows a **monolithic architecture** with modular services, ensuring scalability, maintainability, and performance.
 
-## Features
+## 🛠 Tech Stack
+### **Frontend:**
+- **React.js** (for dynamic UI)
+- **Next.js** (for SSR & SEO optimization)
+- **Tailwind CSS** (for modern styling)
 
-### Customer Features
+### **Backend:**
+- **Spring Boot** (RESTful APIs, Business Logic)
+- **Spring Security & JWT** (Authentication & Authorization)
+- **Gemini API** (AI chatbot integration)
 
-- **User Authentication** (JWT-based secure authentication)
-- **Product Browsing & Filtering** (Search, Filter, Sort, Pagination)
-- **Cart Management** (Add, Update, Remove Items)
-- **Order Management** (Place Orders, Cancel Orders, View Order History)
-- **Payment Integration** (Razorpay for Indian users, Stripe for international users)
-- **Wishlist** (Save favorite products for later)
-- **Reviews & Ratings** (Rate products and leave feedback)
+### **Database:**
+- **MySQL** (Relational data storage - Users, Orders, Products)
+- **MongoDB** (NoSQL storage - Chat History, User Activity Logs)
 
-### Seller Features
+### **Payments & APIs:**
+- **Razorpay & Stripe** (Secure Payment Gateway)
+- **REST APIs** (Standardized endpoints)
 
-- **Seller Dashboard** (Earnings graph, sales reports)
-- **Product Management** (Add, Update, Remove Products)
-- **Order Handling** (Manage incoming orders, update order status)
-- **Transaction Tracking** (Monitor payments and earnings)
+### **DevOps & Tools:**
+- **Postman** (API Testing)
+- **Git & GitHub** (Version Control)
+- **Docker** (Containerization)
+- **AWS** (Deployment)
+- **WebSockets** (Real-time Chat & Notifications)
 
-### Admin Features
+## ⚙️ Architecture
+ShopSphere follows a **Monolithic with Modular Approach** for structured development. Below is a high-level architecture representation:
 
-- **Admin Dashboard** (Monitor overall platform activity)
-- **User & Seller Management** (Approve sellers, manage accounts)
-- **Coupon Management** (Create, edit, delete coupons)
-- **Home Page Management** (Update banners, featured products)
-- **Promotions & Deals** (Create special offers and discounts)
-
-## Tech Stack
-
-### Frontend
-
-- React.js
-- TypeScript
-- Redux Toolkit
-- Tailwind CSS
-- Material UI
-- Axios
-
-### Backend
-
-- Spring Boot
-- Spring Security (JWT authentication)
-- MySQL (for structured data)
-- MongoDB (for chat history)
-- WebSockets (for real-time chat and notifications)
-
-### Payment Integration
-
-- **Razorpay** (For Indian users)
-- **Stripe** (For international users)
-
-## Installation & Setup
-
-### Prerequisites
-
-- Node.js & npm
-- Java 17+
-- MySQL & MongoDB
-
-### Clone Repository
-
-```sh
-  git clone https://github.com/yourusername/ShopSphere.git
-  cd ShopSphere
+```
++------------------+      +-------------------+      +-----------------+
+|  Frontend (UI)  | ---> |  Backend (API)    | ---> |  Database       |
+| (React, Next.js)|      | (Spring Boot)     |      | (MySQL, MongoDB)|
++------------------+      +-------------------+      +-----------------+
+        |                        |                            |
+        v                        v                            v
++-------------------+    +--------------------+    +----------------+
+|  Authentication   |    |  Order Management  |    |  Chat Service  |
+|  (JWT, Security)  |    |  (Payments, Cart)  |    |  (WebSockets)  |
++-------------------+    +--------------------+    +----------------+
 ```
 
-### Backend Setup
+## 🗄 Database Design
+### **MySQL (Relational) - Structured Data**
+- **Users** (UserID, Name, Email, Password, Role)
+- **Products** (ProductID, Name, Description, Price, Stock)
+- **Orders** (OrderID, UserID, ProductID, Status, PaymentID)
 
+### **MongoDB (NoSQL) - Unstructured Data**
+- **Chat Messages** (Sender, Receiver, Message, Timestamp)
+- **Activity Logs** (User Actions, Timestamps)
+
+## 📊 UML Diagrams
+### **1. Use Case Diagram**
+![Use Case Diagram](https://your-image-link.com/use-case.png)
+
+### **2. ER Diagram**
+![ER Diagram](https://your-image-link.com/er-diagram.png)
+
+## 🌟 Key Features
+- **User Authentication & Role-based Access Control (RBAC)**
+- **Product Management (CRUD Operations)**
+- **Order & Cart System with Payment Integration**
+- **Real-time Chat System using WebSockets**
+- **AI Chatbot for Personalized Assistance (Gemini API)**
+- **Dockerized Deployment on AWS**
+
+## 🚀 Getting Started
+### **1. Clone the Repository**
 ```sh
-  cd backend
-  mvn clean install
-  mvn spring-boot:run
+git clone https://github.com/your-username/ShopSphere.git
+cd ShopSphere
 ```
 
-### Frontend Setup
-
+### **2. Setup Backend (Spring Boot)**
 ```sh
-  cd frontend
-  npm install
-  npm start
+cd backend
+mvn clean install
+mvn spring-boot:run
 ```
 
-## Environment Variables
-
-Create a `.env` file in both frontend and backend directories and configure the following variables:
-
-### Backend (.env)
-
+### **3. Setup Frontend (React.js & Next.js)**
 ```sh
-JWT_SECRET=your_jwt_secret
-STRIPE_SECRET_KEY=your_stripe_key
-RAZORPAY_API_KEY=your_razorpay_key
-RAZORPAY_API_SECRET=your_razorpay_secret
-DATABASE_URL=jdbc:mysql://localhost:3306/shopsphere
+cd frontend
+npm install
+npm run dev
 ```
 
-### Frontend (.env)
+### **4. Setup Database**
+- Install **MySQL** & **MongoDB**
+- Create databases & update `application.properties`
 
-```sh
-REACT_APP_API_URL=http://localhost:8080
-REACT_APP_STRIPE_PUBLIC_KEY=your_stripe_public_key
-```
+### **5. Run the Application**
+Open `http://localhost:3000` in your browser.
 
-## API Documentation
+## 🔥 Deployment
+- **Frontend**: Deployed on **Vercel**
+- **Backend**: Dockerized & deployed on **AWS EC2**
+- **Database**: MySQL & MongoDB hosted on **AWS RDS**
 
-The API follows RESTful principles and uses JWT authentication. Detailed API documentation can be found in the `docs` directory or accessed via Postman collection.
+## 🤝 Contribution
+Want to improve ShopSphere? Fork the repo, make changes, and submit a pull request!
 
-## Security Measures
+## 📜 License
+This project is licensed under the MIT License.
 
-- **JWT-based authentication** for secure login
-- **Role-based access control** to prevent unauthorized access
-- **Data encryption** for sensitive user data
-- **Secure payment processing** using Razorpay & Stripe
+## 👨‍💻 Author
+**Saurabh Shirbhate**  
+[GitHub](https://github.com/your-username) | [LinkedIn](https://linkedin.com/in/your-profile)  
 
-## Challenges & Solutions
-
-- **Ensuring secure authentication**: Implemented JWT and Spring Security.
-- **Handling payment failures**: Implemented retry mechanisms and webhook listeners.
-- **Scalability concerns**: Optimized queries and used Redis caching for frequently accessed data.
-
-## Future Improvements
-
-- Implementing AI-powered product recommendations.
-- Adding multilingual and multi-currency support.
-- Enhancing analytics and reporting for sellers and admins.
-
-## Contributing
-
-Contributions are welcome! Please create an issue or submit a pull request for improvements.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-For queries or collaborations, reach out at [your.email@example.com](mailto:saurabhshirbhate.96@gmail.com).
-
+---
+🚀 **ShopSphere - The Future of E-Commerce!**
