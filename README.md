@@ -50,14 +50,6 @@ ShopSphere follows a **Monolithic Architecture** structured as:
 - **Order Service**: Handles cart, orders & transactions
 - **Payment Service**: Integrates with payment gateways
 
-Each service will have its own database and communicate via REST APIs or gRPC.
-
-## 🗂 Database Design
-- **User Table** (id, name, email, role, password, created_at)
-- **Product Table** (id, name, description, price, stock, seller_id, category_id)
-- **Order Table** (id, user_id, total_amount, status, created_at)
-- **Payment Table** (id, order_id, payment_status, transaction_id)
-
 ## 🔗 UML Diagram
 ```
             +------------+        +------------+       +------------+
